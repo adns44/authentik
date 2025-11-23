@@ -79,9 +79,7 @@ class UsedByMixin:
             # useless if the user doesn't have all permissions, or we need to double
             # query and check if there is a difference between modes the user can see
             # and can't see and add a warning
-            for obj in get_objects_for_user(
-                request.user, f"{app}.view_{model_name}", manager
-            ).all():
+            for obj in get_objects_for_user(request.user, f"{app}.view_{model_name}").all():
                 # Only merge shadows on first object
                 if first_object:
                     shadows += getattr(manager.model._meta, "authentik_used_by_shadows", [])
